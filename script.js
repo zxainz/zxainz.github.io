@@ -6,9 +6,99 @@
 (function () {
   'use strict';
 
+  /* ==========================================================================
+     0. CRYPTOGRAPHIC SELF-INTEGRITY, DOMAIN LOCK & ANTI-TAMPER DEFENSE ENGINE
+     ========================================================================== */
+  // 1. Anti-Frame / Anti-Clickjacking Defense
+  if (window.top !== window.self) {
+    try {
+      window.top.location = window.self.location;
+    } catch (e) {
+      document.documentElement.innerHTML = '';
+    }
+  }
+
+  // 2. Domain Lock with Stolen Mirror Auto-Takeover & Redirection
+  const _AUTH_HOSTS = ['zxainz.github.io', 'localhost', '127.0.0.1', ''];
+  const _CURR_HOST = (window.location.hostname || '').toLowerCase();
+  if (!_AUTH_HOSTS.includes(_CURR_HOST)) {
+    document.documentElement.innerHTML = `
+      <div style="background:#0c0e12;color:#ff2a3b;font-family:monospace;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;margin:0;padding:20px;text-align:center;">
+        <h1 style="font-size:2rem;letter-spacing:0.1em;margin-bottom:12px;">[!] UNAUTHORIZED MIRROR DETECTED</h1>
+        <p style="color:#ffffff;max-width:600px;line-height:1.6;font-size:1.05rem;">This portfolio and its offensive security architecture are the private intellectual property of <strong>Muhammad Zain Ul Aabdin</strong>.</p>
+        <p style="color:#8892b0;font-size:0.9rem;margin-top:10px;">Unauthorized copying or mirroring is strictly prohibited under international copyright law. Redirecting to official verified site...</p>
+        <a href="https://zxainz.github.io" style="margin-top:24px;display:inline-block;padding:12px 28px;background:#ff2a3b;color:#fff;text-decoration:none;border-radius:4px;font-weight:bold;letter-spacing:0.05em;">Proceed to Official Site</a>
+      </div>
+    `;
+    setTimeout(() => { window.location.href = 'https://zxainz.github.io'; }, 3500);
+    throw new Error('[Security Exception] Unauthorized host deployment');
+  }
+
+  // 3. Cryptographic Self-Integrity Verification
+  async function _verifySelfIntegrity() {
+    const _KEY_SIG = '9a1f0363b3297a785aa3d1d1f3a2536461ae215ebb69e56f082e25b2503f6606';
+    const _rawTokens = [77,117,104,97,109,109,97,100,32,90,97,105,110,32,85,108,32,65,97,98,100,105,110,32,124,32,80,101,110,101,116,114,97,116,105,111,110,32,84,101,115,116,101,114,32,124,32,79,102,102,101,110,115,105,118,101,32,83,101,99,117,114,105,116,121,32,83,112,101,99,105,97,108,105,115,116,32,124,32,67,121,98,101,114,118,111,108,32,124,32,75,97,114,97,99,104,105,32,85,110,105,118,101,114,115,105,116,121,32,124,32,114,101,100,104,97,116,122,97,121,110,64,103,109,97,105,108,46,99,111,109];
+    const _id = String.fromCharCode(..._rawTokens);
+    
+    const _pageContent = document.documentElement.textContent || '';
+    if (!_pageContent.includes('Muhammad Zain Ul Aabdin') || !_pageContent.includes('Cybervol')) {
+      document.documentElement.innerHTML = '';
+      throw new Error('[Security Exception] Identity tampering detected');
+    }
+
+    if (window.crypto && crypto.subtle) {
+      try {
+        const _buf = new TextEncoder().encode(_id);
+        const _hashBuf = await crypto.subtle.digest('SHA-256', _buf);
+        const _hashArr = Array.from(new Uint8Array(_hashBuf));
+        const _hex = _hashArr.map(b => b.toString(16).padStart(2, '0')).join('');
+        if (_hex !== _KEY_SIG) {
+          document.documentElement.innerHTML = '';
+          throw new Error('[Security Exception] Cryptographic verification failed');
+        }
+      } catch (err) {
+        document.documentElement.innerHTML = '';
+        throw err;
+      }
+    }
+  }
+
+  // 4. Keyboard Shortcuts & Source Theft Shield
+  function initKeyboardDefense() {
+    window.addEventListener('keydown', (e) => {
+      const isCtrl = e.ctrlKey || e.metaKey;
+      if (
+        e.key === 'F12' ||
+        (isCtrl && (e.key === 'u' || e.key === 'U')) ||
+        (isCtrl && (e.key === 's' || e.key === 'S')) ||
+        (isCtrl && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C'))
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, true);
+
+    document.addEventListener('contextmenu', (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+      e.preventDefault();
+    });
+  }
+
+  // 5. Console Security Canary
+  function initConsoleSecurityBanner() {
+    try {
+      console.log('%c[!] NOTICE: CRYPTOGRAPHIC DEFENSE ACTIVE', 'color:#ff2a3b;font-size:15px;font-weight:bold;background:#0c0e12;padding:6px 12px;border-radius:4px;');
+      console.log('%cAll contents, design systems, and code are the private intellectual property of Muhammad Zain Ul Aabdin.\nUnauthorized mirroring, cloning, or distribution is monitored and strictly prohibited under international copyright law (DMCA / Berne Convention).\nOfficial verified repository: https://zxainz.github.io', 'color:#a0aec0;font-size:12px;line-height:1.5;');
+    } catch (e) {}
+  }
+
   let isModalOpen = false;
 
   document.addEventListener('DOMContentLoaded', () => {
+    initKeyboardDefense();
+    initConsoleSecurityBanner();
+    _verifySelfIntegrity();
     initDynamicLiquidCanvas();
     init3DTiltEngine();
     initModalSystem();
