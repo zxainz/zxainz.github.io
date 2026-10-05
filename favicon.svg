@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15181e" />
+      <stop offset="100%" stop-color="#08090c" />
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2a3b" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#ff2a3b" stop-opacity="0.25" />
+    </linearGradient>
+    <filter id="crimsonDotGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#ff2a3b" flood-opacity="0.9" />
+    </filter>
+  </defs>
+
+  <!-- Dark Carbon Squircle Base -->
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="2" />
+
+  <!-- Bold Z Monogram -->
+  <path d="M 17 18 H 42 V 24.5 L 26.5 40 H 42 V 46 H 17 V 39.5 L 32.5 24 H 17 Z" fill="#ffffff" />
+
+  <!-- Red Accent Dot with Glow -->
+  <circle cx="47.5" cy="43" r="3.5" fill="#ff2a3b" filter="url(#crimsonDotGlow)" />
+</svg>

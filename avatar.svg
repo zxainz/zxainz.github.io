@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f5f5f7"/>
+      <stop offset="100%" stop-color="#ebecef"/>
+    </linearGradient>
+    <linearGradient id="glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3344" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#111111" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="char-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f2328"/>
+      <stop offset="100%" stop-color="#0d0e12"/>
+    </linearGradient>
+    <linearGradient id="red-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff1a35"/>
+      <stop offset="100%" stop-color="#cc001a"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="200" height="200" fill="url(#bg-grad)"/>
+
+  <!-- Liquid Ambient Aura in Avatar -->
+  <circle cx="100" cy="90" r="70" fill="url(#glow-grad)"/>
+
+  <!-- Cyber Grid Lines subtle -->
+  <g stroke="#e2e4e9" stroke-width="0.75" opacity="0.6">
+    <line x1="20" y1="100" x2="180" y2="100"/>
+    <line x1="100" y1="20" x2="100" y2="180"/>
+    <circle cx="100" cy="100" r="45" fill="none" stroke-dasharray="2 3"/>
+  </g>
+
+  <!-- Stylized Cyber / Hacker Silhouette -->
+  <!-- Shoulders / Hood -->
+  <path d="M 40 185 C 45 140 70 128 100 128 C 130 128 155 140 160 185 Z" fill="url(#char-grad)" filter="url(#soft-shadow)"/>
+  
+  <!-- Subtle collar / visor line -->
+  <path d="M 75 142 L 100 155 L 125 142" stroke="url(#red-accent)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Head / Hood Contour -->
+  <path d="M 68 95 C 68 58 82 45 100 45 C 118 45 132 58 132 95 C 132 122 118 128 100 128 C 82 128 68 122 68 95 Z" fill="url(#char-grad)"/>
+
+  <!-- Sleek Cyber Visor / Glasses glowing red -->
+  <rect x="79" y="84" width="42" height="7" rx="3.5" fill="url(#red-accent)" filter="url(#soft-shadow)"/>
+  
+  <!-- Sleek light reflection on visor -->
+  <rect x="83" y="85.5" width="12" height="2" rx="1" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Tech status dot -->
+  <circle cx="128" cy="74" r="2" fill="#ff1a35"/>
+</svg>
